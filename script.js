@@ -49,7 +49,7 @@ const insertRecursively = (node,data) => {
   //   ${node ? node.data : 'null'} and data: 
   //   ${data}`);
   // console.log(node ? true : false);
-  console.log(`${node ? node.data : 'null'}`);
+  // console.log(`${node ? node.data : 'null'}`);
   if (node === null) return new Node(data)
     if (data < node.data) {
       node.left = insertRecursively(node.left, data)
@@ -58,19 +58,16 @@ const insertRecursively = (node,data) => {
       node.right = insertRecursively(node.right, data)
       
     }
-    
+    // console.log(`${node ? node.data : 'null'}`);
     return node
 }
 this.root = insertRecursively(this.root, data)
-
-
-
 
       // let current = this.root;
       // while (true) {
       //   if (data < current.data) {
       //     if (current.left === null) {
-      //       current.left = new Node(data);
+    this.deleteItem  //       current.left = new Node(data);
       //       return;
       //     }
       //     current = current.left;
@@ -81,11 +78,37 @@ this.root = insertRecursively(this.root, data)
       //     }
       //     current = current.right;
       //   }
-      // }
+      // }    
+    }
+    deleteItem(data) {
+      // if the bst is empty
+      if (!this.root) return null;
+      // if the bst is not empty
+const deleteRecursively = (node, data) => {
+// base case
+if (node.data === data && !node.left &&
+  !node.right) {
+  return null
+}
+// when delete target node has 1 child
+else if (node.data === data &&
+  !node.left || !node.right) {
+  return node.left || node.right
+
+  }
 
 
-      
-    
+  if (data < node.data) {
+    node.left = deleteRecursively(node.left, data)
+
+  } else if (data > node.data) {
+node.right = deleteRecursively(node.right, data)
+  }
+  // console.log(node.data);
+  return node
+}
+this.root = deleteRecursively(this.root, data)
+
 
     }
 }
@@ -113,7 +136,9 @@ const tree1 = new Tree(array1)
 // console.log(tree1.sortArrayAscending(array1))
 const tree2 = new Tree(array2)
 tree2.insert(2)
-console.log(tree2.root)
+tree2.deleteItem(3)
+
+console.log(tree2.root.left)
 
 // prettyPrint(tree1.root)
 prettyPrint(tree2.root)
