@@ -93,9 +93,25 @@ if (node.data === data && !node.left &&
 // when delete target node has 1 child
  if (node.data === data &&
   (node.left === null) !== (node.right === null)) {
-  return node.left || node.right
-
+  return node.left || node.right;
   }
+  // when delete target node has 2 children
+  if (node.data === data && node.left && node.right) {
+// find and store the inorder successor which is min value in the right subtree
+let rightSubtree = node.right;
+console.log(rightSubtree.data);
+while (rightSubtree.left) {
+  rightSubtree = rightSubtree.left;
+  
+}
+console.log(rightSubtree.data);
+
+node.data = rightSubtree.data;
+node.right = deleteRecursively(node.right, rightSubtree.data);
+return node;
+  }
+
+
 
 
   if (data < node.data) {
@@ -125,19 +141,18 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
   }
 };
 
-
-
-
-
 const array1 = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
-const array2 = [1,3,4,5,6]
+const array2 = [1,3,4, 4.5, 5,6, 7,8, 9,]
 
 const tree1 = new Tree(array1)
 // console.log(tree1.sortArrayAscending(array1))
 const tree2 = new Tree(array2)
 tree2.insert(2)
-tree2.deleteItem(3)
+tree2.insert(1.6)
+// tree2.deleteItem(3)
+tree2.deleteItem(5)
 
+// console.log(tree1.root)
 console.log(tree2.root.left)
 
 // prettyPrint(tree1.root)
