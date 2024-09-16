@@ -91,8 +91,8 @@ if (node.data === data && !node.left &&
   return null
 }
 // when delete target node has 1 child
-else if (node.data === data &&
-  !node.left || !node.right) {
+ if (node.data === data &&
+  (node.left === null) !== (node.right === null)) {
   return node.left || node.right
 
   }
