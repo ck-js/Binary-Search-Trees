@@ -138,9 +138,12 @@ while (current) {
   }
   return null
     }
-    levelOrder() {
+    levelOrder(callback) {
+      if (typeof callback !== 'function') {
+        throw new Error('callback must be a function')
+        }
       if (!this.root) return null;
-      let results = [];
+      // let results = [];
       let queue = [];
       
 const levelOrderRecursively = (node) => {
@@ -148,7 +151,8 @@ if (!node) {
   console.log('End of bst');
   return
 }
-results.push(node.data)
+callback(node)
+// results.push(node.data)
 if (node.left) {
   queue.push(node.left)
 } 
@@ -162,7 +166,7 @@ levelOrderRecursively(nextNode)
 }
 this.root = levelOrderRecursively(this.root)
 
-return results;
+
     }
 
     
@@ -199,7 +203,13 @@ tree2.insert(1.6)
 // tree2.deleteItem(5)
 // console.log(tree2.find(5))
 // console.log(tree2.levelOrder());
-tree2.levelOrder()
+try {
+tree2.levelOrder(data => {
+  console.log(data.data)
+})
+} catch (error) {
+  console.error(error.message)
+}
 // prettyPrint(tree2.root)
 
 // console.log(tree1.root)
