@@ -165,10 +165,25 @@ levelOrderRecursively(nextNode)
 
 }
 this.root = levelOrderRecursively(this.root)
-
-
     }
+inOrder(callback) {
+  if (typeof callback !== 'function') {
+    throw new Error('callback must be a function')
+    }
+  if (!this.root) return null;
+const inOrderRecursively = (node) => {
+if (!node) {
+  return node + 
+}
+console.log('left ' + node.left);
+inOrderRecursively(node.left)
+callback(node)
+inOrderRecursively(node.right)
 
+}    
+this.root = inOrderRecursively(this.root)
+
+}
     
   
 
@@ -203,8 +218,9 @@ tree2.insert(1.6)
 // tree2.deleteItem(5)
 // console.log(tree2.find(5))
 // console.log(tree2.levelOrder());
+// tree2.levelOrder(data => console.log(data.data))
 try {
-tree2.levelOrder(data => {
+tree2.inOrder(data => {
   console.log(data.data)
 })
 } catch (error) {
