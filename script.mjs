@@ -205,7 +205,25 @@ preOrderRecursively(node.right)
 this.root = preOrderRecursively(this.root)
 
 }
+postOrder(callback) {
+  if (typeof callback !== 'function') {
+    throw new Error('callback must be a function')
+    }
+  if (!this.root) return null;
+const postOrderRecursively = (node) => {
+if (!node) {
+  return 
+}
+// console.log('left ' + node.left);
 
+postOrderRecursively(node.left)
+postOrderRecursively(node.right)
+
+callback(node)
+
+}    
+this.root = postOrderRecursively(this.root)
+}
 
 
 }
@@ -257,8 +275,11 @@ tree2.insert(1.6)
   // logDataPreOrder(tree2)
   // tree2.levelOrder(data => console.log(data.data))
 // tree2.inOrder(data => console.log(data.data))   
-tree2.preOrder(data => console.log(data.data))
-
+try {
+  tree2.postOrder(data => console.log(data.data))
+} catch (error) {
+  console.error(error.message);
+}
 
 
 export default Tree
