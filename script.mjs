@@ -231,6 +231,8 @@ height(node) {
   const leftSubtree = rootNode.left
   const rightSubtree = rootNode.right
   
+if (!leftSubtree && !rightSubtree) return -1;
+
   let leftHeight = 0;
   let rightHeight = 0;
 
@@ -252,15 +254,25 @@ traverseRecursivelyRight(node.left)
 traverseRecursivelyRight(node.right)
 rightHeight++
   }
+  if (leftSubtree) {
 traverseRecursivelyLeft(leftSubtree.left)
 traverseRecursivelyRight(leftSubtree.right)
-const leftSubtreeMaxHeight = getMax(leftHeight, rightHeight)
+
+  } else {
+    leftHeight = -1
+  }
+  const leftSubtreeMaxHeight = getMax(leftHeight, rightHeight)
 
 leftHeight = 0
 rightHeight = 0;
 
+if (rightSubtree) {
 traverseRecursivelyLeft(rightSubtree.left)
 traverseRecursivelyRight(rightSubtree.right)
+
+} else {
+  rightHeight = -1
+}
 const rightSubtreeMaxHeight = getMax(leftHeight, rightHeight)
 
 const treeHeight = getMax(leftSubtreeMaxHeight, rightSubtreeMaxHeight)
@@ -319,6 +331,6 @@ tree2.insert(1.6)
   // tree2.levelOrder(data => console.log(data.data))
 // tree2.inOrder(data => console.log(data.data))   
 // tree2.postOrder(data => console.log(data.data))
-console.log(tree2.height(5))
+console.log(tree2.height(8))
 
 export default Tree
