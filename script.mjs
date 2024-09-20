@@ -224,6 +224,49 @@ callback(node)
 }    
 this.root = postOrderRecursively(this.root)
 }
+height(node) {
+
+  const rootNode = this.find(node)
+
+  const leftSubtree = rootNode.left
+  const rightSubtree = rootNode.right
+  
+  let leftHeight = 0;
+  let rightHeight = 0;
+
+  const getMax = (left,right) => {
+    return left > right ? left : right;
+  }
+
+  const traverseRecursivelyLeft = (node) => {
+    if (!node) return 
+
+traverseRecursivelyLeft(node.left)
+traverseRecursivelyLeft(node.right)
+leftHeight++
+  }
+  const traverseRecursivelyRight = (node) => {
+    if (!node) return 
+
+traverseRecursivelyRight(node.left)
+traverseRecursivelyRight(node.right)
+rightHeight++
+  }
+traverseRecursivelyLeft(leftSubtree.left)
+traverseRecursivelyRight(leftSubtree.right)
+const leftSubtreeMaxHeight = getMax(leftHeight, rightHeight)
+
+leftHeight = 0
+rightHeight = 0;
+
+traverseRecursivelyLeft(rightSubtree.left)
+traverseRecursivelyRight(rightSubtree.right)
+const rightSubtreeMaxHeight = getMax(leftHeight, rightHeight)
+
+const treeHeight = getMax(leftSubtreeMaxHeight, rightSubtreeMaxHeight)
+
+return treeHeight + 1
+}
 
 
 }
@@ -275,11 +318,7 @@ tree2.insert(1.6)
   // logDataPreOrder(tree2)
   // tree2.levelOrder(data => console.log(data.data))
 // tree2.inOrder(data => console.log(data.data))   
-try {
-  tree2.postOrder(data => console.log(data.data))
-} catch (error) {
-  console.error(error.message);
-}
-
+// tree2.postOrder(data => console.log(data.data))
+console.log(tree2.height(5))
 
 export default Tree
