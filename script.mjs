@@ -279,6 +279,40 @@ const treeHeight = getMax(leftSubtreeMaxHeight, rightSubtreeMaxHeight)
 
 return treeHeight + 1
 }
+depth(value) {
+  
+  let edges = 0;
+
+  const traverseRecursively = (node) => {
+  
+
+if (!node) {
+  console.log('base case met');
+  
+  return
+}
+
+
+if (value < node.data) {
+  traverseRecursively(node.left)
+  edges++
+}
+if (value > node.data) {
+  traverseRecursively(node.right)
+  edges++
+}
+console.log(node.data);
+
+
+  }
+ traverseRecursively(this.root)
+
+ 
+
+
+  return edges
+
+}
 
 
 }
@@ -331,6 +365,7 @@ tree2.insert(1.6)
   // tree2.levelOrder(data => console.log(data.data))
 // tree2.inOrder(data => console.log(data.data))   
 // tree2.postOrder(data => console.log(data.data))
-console.log(tree2.height(8))
+// console.log(tree2.height(8))
+console.log(tree2.depth(11.6));
 
 export default Tree
