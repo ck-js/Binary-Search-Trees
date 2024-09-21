@@ -282,16 +282,13 @@ return treeHeight + 1
 depth(value) {
   
   let edges = 0;
+  let lastNode = null
 
   const traverseRecursively = (node) => {
-  
-
 if (!node) {
-  console.log('base case met');
-  
-  return
+  return 
 }
-
+lastNode = node.data;
 
 if (value < node.data) {
   traverseRecursively(node.left)
@@ -301,16 +298,18 @@ if (value > node.data) {
   traverseRecursively(node.right)
   edges++
 }
-console.log(node.data);
-
-
   }
- traverseRecursively(this.root)
-
  
+  traverseRecursively(this.root)
 
+  if (lastNode === value){
+ return edges
+} else {
+  edges = -1
+}
 
-  return edges
+return edges
+  
 
 }
 
@@ -366,6 +365,6 @@ tree2.insert(1.6)
 // tree2.inOrder(data => console.log(data.data))   
 // tree2.postOrder(data => console.log(data.data))
 // console.log(tree2.height(8))
-console.log(tree2.depth(11.6));
+console.log(tree2.depth(1.6));
 
 export default Tree
