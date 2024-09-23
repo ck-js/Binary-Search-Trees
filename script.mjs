@@ -309,35 +309,51 @@ if (value > node.data) {
 }
 
 return edges
+}
+
+
+// Main function to check if a tree is balanced
+isBalanced() {
+  //Helper function to calculate height and check balance at the same time
+  function checkHeightAndBalance(node) {
+    // Base case: if node is null, it's balanced and has height -1
+    if (node === null) {
+      return { height: -1, balanced: true };
+    }
+    // Recursively check the left subtree
+    const left = checkHeightAndBalance(node.left);
+    
+    if (!left.balanced) {
+      return { height: -1, balanced: false }; // If left subtree is unbalanced, propagate the result
+    }
   
-
-}
-
-
-}
-
-
-
-
-function logDataInOrder(tree) {
-  try {
-    tree.inOrder(data => {
-      console.log(data.data)
-    })
-    } catch (error) {
-      console.error(error.message)
+    // Recursively check the right subtree
+    const right = checkHeightAndBalance(node.right);
+    if (!right.balanced) {
+      return { height: -1, balanced: false }; // If right subtree is unbalanced, propagate the result
     }
-}
-function logDataPreOrder(tree) {
-  try {
-    tree.preOrder(data => {
-      console.log(data.data)
-    })
-    } catch (error) {
-      console.error(error.message)
-    }
+  
+    // Calculate the height of the current node
+    const currentHeight = Math.max(left.height, right.height) + 1;
+  
+    // Check if the current node is balanced (difference in heights <= 1)
+    const balanced = Math.abs(left.height - right.height) <= 1;
+  
+    // Return the height and whether it's balanced
+    console.log(`Node: ${node.data}, Height: ${currentHeight}, Balanced: ${balanced}`);
+    return { height: currentHeight, balanced: balanced };
+  }
+
+
+  
+  const result = checkHeightAndBalance(this.root);
+  
+  return result.balanced;
 }
 
+
+
+};
 
 
 
@@ -363,8 +379,10 @@ tree2.insert(1.6)
   // logDataPreOrder(tree2)
   // tree2.levelOrder(data => console.log(data.data))
 // tree2.inOrder(data => console.log(data.data))   
+// tree2.preOrder(data => console.log(data.data))
 // tree2.postOrder(data => console.log(data.data))
 // console.log(tree2.height(8))
-console.log(tree2.depth(1.6));
+// console.log(tree2.depth(1.6));
+console.log(tree2.isBalanced());
 
 export default Tree
