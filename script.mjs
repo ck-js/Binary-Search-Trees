@@ -365,6 +365,21 @@ return this.root = this.buildTree(nodes, 0, nodes.length - 1);
 
 };
 
+
+const prettyPrint = (node, prefix = "", isLeft = true) => {
+  if (node === null) {
+    return;
+  }
+  if (node.right !== null) {
+    prettyPrint(node.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
+  }
+  console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
+  if (node.left !== null) {
+    prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
+  }
+};
+
+
 // function that creates array of random numbers < 100
 const createArray = (length) => {
   const array = [];
@@ -392,8 +407,9 @@ console.log(tree1.isBalanced());
 // tree1.levelOrder(node => console.log(node.data));
 // tree1.preOrder(node => console.log(node.data));
 // tree1.postOrder(node => console.log(node.data));
-// tree1.inOrder(node => console.log(node.data));
+tree1.inOrder(node => console.log(node.data));
 
+// prettyPrint(tree1.root);
 
 
 
