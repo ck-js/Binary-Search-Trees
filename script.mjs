@@ -148,7 +148,7 @@ while (current) {
       
 const levelOrderRecursively = (node) => {
 if (!node) {
-  console.log('End of bst');
+  // console.log('End of bst');
   return
 }
 callback(node)
@@ -365,38 +365,34 @@ return this.root = this.buildTree(nodes, 0, nodes.length - 1);
 
 };
 
+// function that creates array of random numbers < 100
+const createArray = (length) => {
+  const array = [];
+  for (let i = 0; i < length; i++) {
+    array.push(Math.floor(Math.random() * 100));
+  }
+  return array;
+}
 
 
-const array1 = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
-const array2 = [1,3,4, 4.5, 5,6, 7,8, 9,]
-// const array2 = []
+// driver script for testing
 
-
-const tree1 = new Tree(array1)
-// console.log(tree1.sortArrayAscending(array1))
-const tree2 = new Tree(array2)
-tree2.insert(2)
-tree2.insert(1.6)
-
-// tree2.deleteItem(3)
-// tree2.deleteItem(5)
-// console.log(tree2.find(5))
-// console.log(tree2.levelOrder());
-// tree2.levelOrder(data => console.log(data.data))
-
-//   prettyPrint(tree2.root)  
-// logDataInOrder(tree2)
-  // logDataPreOrder(tree2)
-  // tree2.levelOrder(data => console.log(data.data))
-// tree2.inOrder(data => console.log(data.data))   
-// tree2.preOrder(data => console.log(data.data))
-// tree2.postOrder(data => console.log(data.data))
-// console.log(tree2.height(8))
-// console.log(tree2.depth(1.6));
-// console.log(tree2.isBalanced());
-console.log(tree2.isBalanced());
-console.log(tree2.rebalance());
-console.log(tree2.isBalanced());
+const tree1 = new Tree(createArray(10))
+console.log(tree1.isBalanced());
+// console.log(tree1);
+// tree1.levelOrder(node => console.log(node.data));
+// tree1.preOrder(node => console.log(node.data));
+// tree1.postOrder(node => console.log(node.data));
+// tree1.inOrder(node => console.log(node.data));
+tree1.insert(128)
+tree1.insert(129)
+console.log(tree1.isBalanced());
+tree1.rebalance()
+console.log(tree1.isBalanced());
+// tree1.levelOrder(node => console.log(node.data));
+// tree1.preOrder(node => console.log(node.data));
+// tree1.postOrder(node => console.log(node.data));
+// tree1.inOrder(node => console.log(node.data));
 
 
 
