@@ -340,17 +340,27 @@ isBalanced() {
     const balanced = Math.abs(left.height - right.height) <= 1;
   
     // Return the height and whether it's balanced
-    console.log(`Node: ${node.data}, Height: ${currentHeight}, Balanced: ${balanced}`);
+    // console.log(`Node: ${node.data}, Height: ${currentHeight}, Balanced: ${balanced}`);
     return { height: currentHeight, balanced: balanced };
   }
-
-
   
-  const result = checkHeightAndBalance(this.root);
-  
+  const result = checkHeightAndBalance(this.root);  
   return result.balanced;
 }
+rebalance() {
+  // traverse tree in inorder
+  const nodes = [];
+  const traverse = (node) => {
+    if (!node) return;
 
+    traverse(node.left);
+    nodes.push(node.data);
+    traverse(node.right);
+  }
+  traverse(this.root);
+  // build a new tree from the sorted array
+return this.root = this.buildTree(nodes, 0, nodes.length - 1);  
+}
 
 
 };
@@ -383,6 +393,12 @@ tree2.insert(1.6)
 // tree2.postOrder(data => console.log(data.data))
 // console.log(tree2.height(8))
 // console.log(tree2.depth(1.6));
+// console.log(tree2.isBalanced());
 console.log(tree2.isBalanced());
+console.log(tree2.rebalance());
+console.log(tree2.isBalanced());
+
+
+
 
 export default Tree
